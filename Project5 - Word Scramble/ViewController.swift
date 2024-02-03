@@ -18,10 +18,9 @@ class ViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
         
 //      to find the start.txt file
-        if let startWordsURL = Bundle.main.url(forResource: "start",
-                                               withExtension: "txt") {
+        if let startWordsPath = Bundle.main.path(forResource: "start", ofType: "txt") {
 //          to find if the words exist
-            if let startWords = try? String(contentsOf: startWordsURL) {
+            if let startWords = try? String(contentsOfFile: startWordsPath) {
                 allWords = startWords.components(separatedBy: "\n")
 //                print(allWords)
             }
@@ -46,14 +45,14 @@ class ViewController: UITableViewController {
     }
     
 //  number of rows in table view using array elements count
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usedWords.count
     }
     
 //  what data to display
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //      selects the prototype cell identifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: "work", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Word", for: indexPath)
 //      passes data to display at respective row
         cell.textLabel?.text = usedWords[indexPath.row]
         return cell
@@ -67,14 +66,14 @@ class ViewController: UITableViewController {
         ac.addTextField()
         
 //      using trailing closure syntax
-        let submitAction = UIAlertAction(title: "Submit", style: .default) {
-//          specifies the input to the closure
-//          before in we have our parameters and after it we have our closure body
-            [weak self, weak ac] _ in
-//          using ? for a weak reference beacause it can be nil in the future
-//          if nothing is entered in the text are it returns nothing
-            guard let answer = ac?.textFields?[0].text else { return }
-            self?.submit(answer)
+//      specifies the input to the closure
+//      before in we have our parameters and after it we have our closure body
+//      using ? for a weak reference beacause it can be nil in the future
+//      if nothing is entered in the text are it returns nothing
+        let submitAction = UIAlertAction(title: "Submit", style:
+            .default) { [unowned self, ac] action in
+            let answer = ac.textFields![0]
+            self.submit(answer.text!)
         }
         
 //      creating a button
@@ -83,7 +82,67 @@ class ViewController: UITableViewController {
     }
     
     func submit(_ answer: String) {
+//      making all strings lowercased
+        let lowerAnswer = answer.lowercased()
         
+        let errorTitle: String
+        let errorMessage: String
+        
+        
+        if isPossible(word: lowerAnswer) {
+            if isOrignal(word: lowerAnswer) {
+                if isReal(word: lowerAnswer) {
+//                  inserting word to usedwords array
+                    usedWords.insert(lowerAnswer, at: 0)
+                    
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    tableView.insertRows(at: [indexPath], with: .automatic)
+                    return
+                } else {
+                    errorTitle = "Word not recognized"
+                    errorMessage = "You can't just make them up, you know!"
+                }
+            }  else {
+                errorTitle = "Word alreaedy used"
+                errorMessage = "Be more orignal!"
+            }
+        } else {
+            errorTitle = "Word not possible"
+            errorMessage = "You can't spell that word from \(title!.lowercased())"
+        }
+        
+        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+    
+    func isPossible(word: String) -> Bool {
+        var tempWord = title!.lowercased()
+        
+        for letter in word {
+            if let position = tempWord.range(of: String(letter)) {
+                tempWord.remove(at: position.lowerBound)
+            } else {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    func isOrignal(word: String) -> Bool {
+        return !usedWords.contains(word)
+    }
+    
+    func isReal(word: String) -> Bool {
+        let checker = UITextChecker()
+//      telling the range of the word, when we work with UIkit sprite kit or an apple frame work use .utf16.count
+//      else use .count
+        let range = NSMakeRange(0, word.utf16.count)
+        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        
+        return misspelledRange.location == NSNotFound
     }
 }
+
 

@@ -1,4 +1,4 @@
-I've made a step-by-step guide to make this app for study purposes, feel free to take a look. https://www.notion.so/19-Card-Workout-App-592d1f1bf65d44fe8fe5eaa95f8f4780?pvs=4
+A game app which gives you a string and asks you to enter words you can construct using that string, if it's correct that word is saved and entered in the displayed table, if it's repeated it gives out an alert error, if word is not valid it gives out an error.
 
 <img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/App%20icon%20-%20ws.png" width="150" height="150">
  

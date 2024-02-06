@@ -2,7 +2,8 @@ A game app which gives you a string and asks you to enter words you can construc
 
 <img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/App%20icon%20-%20ws.png" width="150" height="150">
  
-<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/First%20Page%20-%20ws.png" width="250" height="450">
-<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/second%20page%20-%20ws.png" width="250" height="450">
-<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/word%20not%20possible%20alert.png" width="250" height="450">
-<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/word%20used%20alert.png" width="250" height="450">
+<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/First%20Page%20-%20WG.png" width="250" height="450">
+<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/Second%20Page%20-%20WG.png" width="250" height="450">
+<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/First%20error%20-%20WG.png" width="250" height="450">
+<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/Second%20Error%20-%20WG.png" width="250" height="450">
+<img src="https://github.com/zeeshan2k2/Project5---Word-Scramble/blob/main/Third%20Error%20-%20WG.png" width="250" height="450">

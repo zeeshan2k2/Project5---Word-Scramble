@@ -16,6 +16,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(restartingGame))
         
 //      to find the start.txt file
         if let startWordsPath = Bundle.main.path(forResource: "start", ofType: "txt") {
@@ -33,7 +34,10 @@ class ViewController: UITableViewController {
         startGame()
     }
     
-    
+//  function to restart game
+    @objc func restartingGame() {
+        startGame()
+    }
     
     func startGame() {
 //      sets title to random word from array, which player uses to find subwords of array
@@ -81,52 +85,69 @@ class ViewController: UITableViewController {
         present(ac, animated: true)
     }
     
-    func submit(_ answer: String) {
-//      making all strings lowercased
-        let lowerAnswer = answer.lowercased()
-        
+//  creating showErrorMessage function which throws error
+    func showErrorMessage(_ theWord: String) -> (errorTitle: String, errorMessage: String) {
         let errorTitle: String
         let errorMessage: String
         
+        if isPossible(word: theWord) == false {
+            errorTitle = "Word not possible"
+            errorMessage = "You can either not spell that word from \(title!.lowercased()) or the word has less than 3 letters"
+            return (errorTitle, errorMessage)
+        } else if isOrignal(word: theWord) == false {
+            errorTitle = "Word alreaedy used"
+            errorMessage = "Be more orignal!"
+            return (errorTitle, errorMessage)
+        } else if isReal(word: theWord) == false {
+            errorTitle = "Word not recognized"
+            errorMessage = "You can't just make them up, you know!"
+            return (errorTitle, errorMessage)
+        }
+        return ("", "")
+    }
+
+    
+    
+    func submit(_ answer: String) {
         
+//      making all strings lowercased
+        let lowerAnswer = answer.lowercased()
+    
         if isPossible(word: lowerAnswer) {
             if isOrignal(word: lowerAnswer) {
                 if isReal(word: lowerAnswer) {
-//                  inserting word to usedwords array
+                    //                  inserting word to usedwords array
                     usedWords.insert(lowerAnswer, at: 0)
                     
                     let indexPath = IndexPath(row: 0, section: 0)
                     tableView.insertRows(at: [indexPath], with: .automatic)
                     return
-                } else {
-                    errorTitle = "Word not recognized"
-                    errorMessage = "You can't just make them up, you know!"
                 }
-            }  else {
-                errorTitle = "Word alreaedy used"
-                errorMessage = "Be more orignal!"
             }
-        } else {
-            errorTitle = "Word not possible"
-            errorMessage = "You can't spell that word from \(title!.lowercased())"
         }
-        
-        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+
+//      no need for else statements I made a function or all false situations
+        let ac = UIAlertController(title: showErrorMessage(lowerAnswer).errorTitle, message: showErrorMessage(lowerAnswer).errorMessage, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
     
     func isPossible(word: String) -> Bool {
         var tempWord = title!.lowercased()
-        
-        for letter in word {
-            if let position = tempWord.range(of: String(letter)) {
-                tempWord.remove(at: position.lowerBound)
-            } else {
-                return false
+        print("This is word \(word)")
+        var wordCount = word.count
+        if wordCount < 3 {
+            print("This is word count \(wordCount)")
+            return false
+        } else {
+            for letter in word {
+                if let position = tempWord.range(of: String(letter)) {
+                    tempWord.remove(at: position.lowerBound)
+                } else {
+                    return false
+                }
             }
         }
-        
         return true
     }
     

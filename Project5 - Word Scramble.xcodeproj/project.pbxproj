@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C117EDBE2B6EF90300A63808 /* heheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117EDBD2B6EF90300A63808 /* heheViewController.swift */; };
 		C1FD93D52B6D9987003978C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FD93D42B6D9987003978C0 /* AppDelegate.swift */; };
 		C1FD93D72B6D9987003978C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FD93D62B6D9987003978C0 /* SceneDelegate.swift */; };
 		C1FD93D92B6D9987003978C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FD93D82B6D9987003978C0 /* ViewController.swift */; };
@@ -18,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C117EDBD2B6EF90300A63808 /* heheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = heheViewController.swift; sourceTree = "<group>"; };
 		C1FD93D12B6D9987003978C0 /* Project5 - Word Scramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project5 - Word Scramble.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1FD93D42B6D9987003978C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1FD93D62B6D9987003978C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 				C1FD93D62B6D9987003978C0 /* SceneDelegate.swift */,
 				C1FD93D82B6D9987003978C0 /* ViewController.swift */,
 				C1FD93DA2B6D9987003978C0 /* Main.storyboard */,
-				C117EDBD2B6EF90300A63808 /* heheViewController.swift */,
 				C1FD93DD2B6D9989003978C0 /* Assets.xcassets */,
 				C1FD93E82B6D9E8D003978C0 /* start.txt */,
 				C1FD93DF2B6D9989003978C0 /* LaunchScreen.storyboard */,
@@ -145,7 +142,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C117EDBE2B6EF90300A63808 /* heheViewController.swift in Sources */,
 				C1FD93D92B6D9987003978C0 /* ViewController.swift in Sources */,
 				C1FD93D52B6D9987003978C0 /* AppDelegate.swift in Sources */,
 				C1FD93D72B6D9987003978C0 /* SceneDelegate.swift in Sources */,
